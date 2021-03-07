@@ -37,13 +37,21 @@ public class Robot implements Constants {
                 drivetrain.setPower(1);
                 drivetrain.useBrake(true);
                 drivetrain.useEncoders(true);
-                drawbridge.setPower(.3);
+                drawbridge.setPower(.8);
                 wobbleGoal.setLiftPower(.8);
                 wobbleGoal.setGrabberPower(1);
                 intake.setPower(.5);
-                outtake.setPower(.5);
+                outtake.setPower(1);
                 break;
             case AUTO:
+                drivetrain.setPower(1);
+                drivetrain.useBrake(true);
+                drivetrain.useEncoders(true);
+                drawbridge.setPower(.8);
+                wobbleGoal.setLiftPower(.8);
+                wobbleGoal.setGrabberPower(1);
+                intake.setPower(.5);
+                outtake.setPower(1);
                 break;
         }
     }

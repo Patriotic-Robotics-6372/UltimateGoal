@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.subsystem.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
+@Autonomous (name = "autonWobbleGoal", group = "auton")
 public class autonWobbleGoal extends LinearOpMode {
 
     Robot prBot = new Robot();
@@ -67,6 +69,7 @@ public class autonWobbleGoal extends LinearOpMode {
                 prBot.getDrivetrain().pointTurn(Constants.Status.LEFT, 5);
                 prBot.getDrivetrain().backward(48);
             }
+            break;
         }
     }
 }

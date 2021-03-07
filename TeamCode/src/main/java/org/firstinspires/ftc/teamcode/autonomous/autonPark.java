@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.subsystem.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
-@Autonomous (name = "autonPark", group = "autonomous")
+@Autonomous (name = "autonPark", group = "auton")
 public class autonPark extends LinearOpMode {
 
     Robot prBot = new Robot();
@@ -21,6 +21,7 @@ public class autonPark extends LinearOpMode {
         while (opModeIsActive()) {
             prBot.getDrivetrain().forward(72);
             prBot.getDrivetrain().stop();
+            break;
         }
     }
 }

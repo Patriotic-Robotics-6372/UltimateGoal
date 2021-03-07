@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.subsystem.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
-@Autonomous (name = "autonScoreRings")
+@Autonomous (name = "autonScoreRings", group = "auton")
 public class autonProbably extends LinearOpMode {
 
     Robot prBot = new Robot();
@@ -42,6 +42,7 @@ public class autonProbably extends LinearOpMode {
             prBot.getDrawbridge().down();
             sleep(2000);
             prBot.getDrivetrain().backward(48);
+            break;
         }
     }
 }

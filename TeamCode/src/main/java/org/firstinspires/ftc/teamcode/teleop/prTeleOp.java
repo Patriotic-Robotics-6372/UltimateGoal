@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.subsystem.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
-@TeleOp (name = "prTeleOp", group = "primary")
+@TeleOp (name = "prTeleOp", group = "a")
 public class prTeleOp extends LinearOpMode {
 
     Robot prbot = new Robot();

@@ -16,7 +16,7 @@ public class DrawbridgeTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         drawbridge = new Drawbridge(hardwareMap.dcMotor.get("pulleyBoi"));
         telem = new Telem(drawbridge, telemetry);
-        drawbridge.setPower(.25);
+        drawbridge.setPower(.70);
         telemetry.addData("Desc", "This programs tests for the Drawbridge class")
                 .addData("How to Use", "Dpad Up to go up, Dpad Down to go down");
         telemetry.update();
