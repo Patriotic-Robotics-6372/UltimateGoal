@@ -15,6 +15,7 @@ public class Drivetrain implements Constants {
     private DcMotor frontLeft, frontRight, backLeft, backRight;
     private double power;
     public int fLTickGoal, fRTickGoal, bLTickGoal, bRTickGoal;
+    public Telemetry telem;
 
     /**
      * Defines the parts needed for the subsystem
@@ -42,6 +43,10 @@ public class Drivetrain implements Constants {
         backLeft.setDirection(DcMotorSimple.Direction.FORWARD);
 
         power = STOP;
+    }
+
+    public void setTelemetry(Telemetry telem) {
+        this.telem = telem;
     }
 
     /**
@@ -261,7 +266,15 @@ public class Drivetrain implements Constants {
         setRunMode(DcMotor.RunMode.RUN_TO_POSITION);
         setBase(fLPower, fRPower, bLPower, bRPower);
         while (allBusy()) {
-
+            telem.addData("fL", frontLeft.getCurrentPosition())
+                    .addData("fR", frontRight.getCurrentPosition())
+                    .addData("bL", backLeft.getCurrentPosition())
+                    .addData("bR", backRight.getCurrentPosition())
+                    .addData("fLTickGoal", fLTickGoal)
+                    .addData("fRTickGoal", fRTickGoal)
+                    .addData("bLTickGoal", bLTickGoal)
+                    .addData("bRTickGoal", bRTickGoal);
+            telem.update();
         }
         stop();
         setRunMode(DcMotor.RunMode.RUN_USING_ENCODER);

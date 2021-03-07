@@ -28,6 +28,7 @@ public class Robot implements Constants {
         outtake = new Outtake(hwMap.dcMotor.get("shoot"), hwMap.crservo.get("positioner"));
         imu = new IMU(hwMap.get(BNO055IMU.class, "imu 1"));
         telem = new Telem(this, telemetry);
+        drivetrain.setTelemetry(telemetry);
     }
 
     public void setMode(Status mode) {
