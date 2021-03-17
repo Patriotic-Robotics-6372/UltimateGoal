@@ -31,11 +31,11 @@ public class Drawbridge implements Constants {
      * Brings the drawbridge mechanism down
      */
     public void down() {
-        pulleyBoi.setPower(power);
+        pulleyBoi.setPower(power * 0.1);
     }
 
     /**
-     * Stops the drawbridge mchanism
+     * Stops the drawbridge mechanism
      */
     public void stop() {
         pulleyBoi.setPower(STOP);
