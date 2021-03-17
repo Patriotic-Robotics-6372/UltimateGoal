@@ -24,7 +24,7 @@ public class Robot implements Constants {
         drivetrain = new Drivetrain(hwMap.dcMotor.get("frontLeft"), hwMap.dcMotor.get("frontRight"), hwMap.dcMotor.get("backLeft"), hwMap.dcMotor.get("backRight"));
         drawbridge = new Drawbridge(hwMap.dcMotor.get("pulleyBoi"));
         wobbleGoal = new WobbleGoal(hwMap.dcMotor.get("wobbleLift"), hwMap.crservo.get("wobbleGrabber"), hwMap.crservo.get("wobbleGrabber2"));
-        intake = new Intake(hwMap.dcMotor.get("roller"));
+        //intake = new Intake(hwMap.dcMotor.get("roller"));
         outtake = new Outtake(hwMap.dcMotor.get("shoot"), hwMap.crservo.get("positioner"));
         imu = new IMU(hwMap.get(BNO055IMU.class, "imu 1"));
         telem = new Telem(this, telemetry);
@@ -40,8 +40,8 @@ public class Robot implements Constants {
                 drawbridge.setPower(.8);
                 wobbleGoal.setLiftPower(.8);
                 wobbleGoal.setGrabberPower(1);
-                intake.setPower(.5);
-                outtake.setPower(1);
+                //intake.setPower(.5);
+                outtake.setPower(.5);
                 break;
             case AUTO:
                 drivetrain.setPower(1);
