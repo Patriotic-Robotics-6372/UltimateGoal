@@ -70,6 +70,8 @@ public class prTeleOpv1_1 extends LinearOpMode {
             // Outtake subsystem
             if (gamepad1.right_bumper) {
                 prbot.getOuttake().shoot();
+            } else if (gamepad1.left_bumper) {
+                prbot.getOuttake().reverse();
             } else {
                 prbot.getOuttake().stop();
             }

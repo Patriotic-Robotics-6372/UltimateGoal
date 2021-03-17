@@ -30,7 +30,10 @@ public class Outtake implements Constants {
      */
     public void shoot() {
         shoot.setPower(power);
+    }
 
+    public void reverse() {
+        shoot.setPower(-power * 0.5);
     }
 
     /**
