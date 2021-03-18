@@ -31,7 +31,7 @@ public class Drawbridge implements Constants {
      * Brings the drawbridge mechanism down
      */
     public void down() {
-        pulleyBoi.setPower(-power * 0.1);
+        pulleyBoi.setPower(-power * 0.8);
     }
 
     /**

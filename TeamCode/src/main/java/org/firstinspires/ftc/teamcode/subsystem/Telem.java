@@ -70,6 +70,7 @@ public class Telem {
 
     public void addDrawbridge() {
         telem.addData("pulleyBoi", drawbridge.getPulleyBoi().getPower());
+        telem.addData("pB enc", drawbridge.getPulleyBoi().getCurrentPosition());
     }
 
     public void addWobbleGoal() {

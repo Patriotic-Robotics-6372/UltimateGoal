@@ -17,8 +17,8 @@ public class PIDTest extends LinearOpMode {
     Drivetrain drive;
     Telem telem;
     PIDControllerAlt movePID;
-    Button y;
-    double calculatedMovePIDValue, correction, power = 0.8;
+    Button y, dpad_up, dpad_down;
+    double calculatedMovePIDValue, correction, power = 0.8, setpoint = 0;
     boolean isMoving, toggle = false;
 
     @Override
@@ -30,6 +30,8 @@ public class PIDTest extends LinearOpMode {
         telem = new Telem(drive, telemetry);
         movePID = new PIDControllerAlt(0.01, 0, 0);
         y = new Button();
+        dpad_down = new Button();
+        dpad_up = new Button();
         telemetry.addData("Desc", "This programs tests a basic PIDController for moving forward with the drivetrain")
                 .addData("How to Use", "Y to toggle PID. X to stop. Try pushing the robot; it should be able to readjust itself");
         telemetry.update();
@@ -53,11 +55,21 @@ public class PIDTest extends LinearOpMode {
 //                }
             y.previous();
             y.setState(gamepad1.y);
+            dpad_down.previous();
+            dpad_down.setState(gamepad1.dpad_down);
+            dpad_up.previous();
+            dpad_up.setState(gamepad1.dpad_up);
             if (y.isPressed()) {
                 toggle = !toggle;
             }
+            if (dpad_up.isPressed()) {
+                setpoint += 10;
+            }
+            if (dpad_down.isPressed()) {
+                setpoint -= 10;
+            }
             if (toggle) {
-                correction = movePID.performPID(drive.getBackLeft().getCurrentPosition());
+                correction = movePID.performPID(drive.getBackLeft().getCurrentPosition()+setpoint);
                 drive.setBase(power + correction);
             }
 
@@ -67,6 +79,8 @@ public class PIDTest extends LinearOpMode {
             telemetry.addData("correction", correction);
             telemetry.addData("power", power + correction);
             telemetry.addData("encoder", drive.getBackLeft().getCurrentPosition());
+            telemetry.addData("toggle", toggle);
+            telemetry.addData("setpoint", setpoint);
             telemetry.update();
 
         }
