@@ -84,7 +84,8 @@ public class Telem {
     }
 
     public void addOuttake() {
-        telem.addData("shoot", outtake.getShoot().getPower());
+        telem.addData("leftFlywheel", outtake.getLeftFlywheel().getPower());
+        telem.addData("rightFlywheel", outtake.getRightFlywheel().getPower());
         telem.addData("positioner", outtake.getPower());
         //telem.addData("positioner", outtake.getPositioner().getPosition() * 180);
     }

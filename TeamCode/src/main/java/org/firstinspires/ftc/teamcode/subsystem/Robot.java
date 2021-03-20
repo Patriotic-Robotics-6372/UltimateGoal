@@ -25,7 +25,7 @@ public class Robot implements Constants {
         drawbridge = new Drawbridge(hwMap.dcMotor.get("pulleyBoi"));
         wobbleGoal = new WobbleGoal(hwMap.dcMotor.get("wobbleLift"), hwMap.crservo.get("wobbleGrabber"), hwMap.crservo.get("wobbleGrabber2"));
         //intake = new Intake(hwMap.dcMotor.get("roller"));
-        outtake = new Outtake(hwMap.dcMotor.get("shoot"), hwMap.crservo.get("positioner"));
+        outtake = new Outtake(hwMap.dcMotor.get("leftFlywheel"), hwMap.dcMotor.get("rightFlywheel"), hwMap.crservo.get("positioner"));
         imu = new IMU(hwMap.get(BNO055IMU.class, "imu 1"));
         telem = new Telem(this, telemetry);
         drivetrain.setTelemetry(telemetry);

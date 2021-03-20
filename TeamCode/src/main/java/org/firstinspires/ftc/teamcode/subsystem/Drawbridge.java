@@ -20,6 +20,11 @@ public class Drawbridge implements Constants {
         this.pulleyBoi = pB;
     }
 
+    public void useEncoders() {
+        pulleyBoi.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pulleyBoi.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
     /**
      * Brings the drawbridge mechanism up
      */

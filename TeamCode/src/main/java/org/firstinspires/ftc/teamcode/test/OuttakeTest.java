@@ -14,9 +14,9 @@ public class OuttakeTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        outtake = new Outtake(hardwareMap.dcMotor.get("shoot"), hardwareMap.crservo.get("positioner"));
+        outtake = new Outtake(hardwareMap.dcMotor.get("leftFlywheel"), hardwareMap.dcMotor.get("rightFlywheel"), hardwareMap.crservo.get("positioner"));
         telem = new Telem(outtake, telemetry);
-        outtake.setPower(.5);
+        outtake.setPower(1);
         telemetry.addData("Desc", "This programs tests for the Outtake class")
                 .addData("How to Use", "Right bumper to shoot. Left bumper to push ring out/let go B to let ring in");
         telemetry.update();
@@ -24,13 +24,10 @@ public class OuttakeTest extends LinearOpMode {
         while (opModeIsActive()) {
             if (gamepad1.right_bumper) {
                 outtake.shoot();
+            } else if (gamepad1.left_bumper) {
+                outtake.reverse();
             } else {
                 outtake.stop();
-            }
-            if (gamepad1.left_bumper) {
-                outtake.positioner();
-            } else {
-                outtake.posReset();
             }
             telem.addOuttake();
             telem.update();

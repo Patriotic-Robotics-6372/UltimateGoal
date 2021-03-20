@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.subsystem.Button;
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.subsystem.PIDController3;
 import org.firstinspires.ftc.teamcode.subsystem.PIDControllerAlt;
 import org.firstinspires.ftc.teamcode.subsystem.Telem;
 
-@Autonomous (name = "DrawbridgePIDTest2", group = "Test")
+@TeleOp (name = "DrawbridgePIDTest", group = "Test")
 public class DrawbridgePIDTest2 extends LinearOpMode {
 
     Drawbridge drawbridge;
@@ -31,8 +32,7 @@ public class DrawbridgePIDTest2 extends LinearOpMode {
         y = new Button();
         dpad_down = new Button();
         dpad_up = new Button();
-        drawbridge.getPulleyBoi().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        drawbridge.getPulleyBoi().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        drawbridge.useEncoders();
         waitForStart();
         while (opModeIsActive()) {
             y.previous();
