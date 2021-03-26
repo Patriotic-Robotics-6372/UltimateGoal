@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Robot;
 public class autonPark extends LinearOpMode {
 
     Robot prBot = new Robot();
+
     @Override
     public void runOpMode() throws InterruptedException {
         prBot.init(hardwareMap, telemetry);
@@ -19,7 +20,12 @@ public class autonPark extends LinearOpMode {
         telemetry.update();
         waitForStart();
         while (opModeIsActive()) {
-            prBot.getDrivetrain().forward(72);
+            prBot.getDrivetrain().setPower(.2);
+            prBot.getDrivetrain().backward(1);
+            prBot.getDrivetrain().stop();
+            sleep(500);
+            //prBot.getDrivetrain().pivotTurn(Constants.Status.RIGHT, 4.5);
+            prBot.getDrivetrain().pivotTurn(Constants.Status.RIGHT, 3);
             prBot.getDrivetrain().stop();
             break;
         }

@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 import static org.firstinspires.ftc.teamcode.subsystem.Constants.Status.NORMAL;
 
-@TeleOp (name = "prTeleOp v1.3")
+@TeleOp (name = "prTeleOp v1.3", group = "a")
 public class prTeleOpv1_3 extends LinearOpMode {
 
     Robot prbot = new Robot();
@@ -72,24 +72,28 @@ public class prTeleOpv1_3 extends LinearOpMode {
                 prbot.getWobbleGoal().stopMotor();
             }
             // Intake subsystem
-            if (gamepad1.right_trigger > .1) {
-                prbot.getIntake().rollIn();
-            } else if (gamepad1.left_trigger > .1) {
-                prbot.getIntake().rollOut();
-            } else {
-                prbot.getIntake().stop();
-            }
+//            if (gamepad1.right_trigger > .1) {
+//                prbot.getIntake().rollIn();
+//            } else if (gamepad1.left_trigger > .1) {
+//                prbot.getIntake().rollOut();
+//            } else {
+//                prbot.getIntake().stop();
+//            }
             // Outtake subsystem
             if (gamepad1.right_bumper) {
                 prbot.getOuttake().shoot();
+            } else if (gamepad1.left_bumper) {
+                prbot.getOuttake().reverse();
             } else {
                 prbot.getOuttake().stop();
             }
-            if (gamepad1.left_bumper) {
-                prbot.getOuttake().positioner();
-            } else {
-                prbot.getOuttake().posReset();
-            }
+            telemetry.addData("Desc", "This is the official teleOp class")
+                    .addData("Drivetrain", "Tank drive. Sticks for basic movement. Buttons for encoder movement")
+                    .addData("Drawbridge", "Dpad Up to go up, Dpad Down to go down")
+                    .addData("WobbleGoal", "x/a for up/down lift. y/b to grab/let go")
+                    .addData("Intake", "right trigger -> inward, left trigger -> outward")
+                    .addData("Outtake", "Right bumper to shoot. Left bumper to push ring out/let go leftBumper to let ring in");
+            telemetry.update();
         }
     }
 }

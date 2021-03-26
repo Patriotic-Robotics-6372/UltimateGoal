@@ -172,7 +172,7 @@ public class Drivetrain implements Constants {
      * @param inches distance
      */
     public void forward(double inches) {
-        drive(-inches, -inches, -inches, -inches, power, power, power, power);
+        drive(inches, inches, inches, inches, power, power, power, power);
     }
 
     /**
@@ -180,7 +180,7 @@ public class Drivetrain implements Constants {
      * @param inches distance
      */
     public void backward(double inches) {
-        drive(inches, inches, inches, inches, power, power, power, power);
+        drive(-inches, -inches, -inches, -inches, power, power, power, power);
     }
 
     /**
@@ -191,10 +191,10 @@ public class Drivetrain implements Constants {
     public void pivotTurn(Status dir, double inches) {
         switch (dir) {
             case LEFT:
-                drive(0, -inches, 0, -inches, power, power, power, power);
+                drive(-inches, -inches, -inches, -inches, 0, power, 0, power);
                 break;
             case RIGHT:
-                drive(-inches, 0, -inches, 0, power, power, power, power);
+                drive(-inches, -inches, -inches, -inches, power, 0, power, 0);
                 break;
         }
     }
@@ -257,10 +257,10 @@ public class Drivetrain implements Constants {
      * @param bRPower
      */
     public void drive(double fLInches, double fRInches, double bLInches, double bRInches, double fLPower, double fRPower, double bLPower, double bRPower) {
-        fLTickGoal = (int) (fLInches * TICKS_PER_IN);
-        fRTickGoal = (int) (fRInches * TICKS_PER_IN);
-        bLTickGoal = (int) (bLInches * TICKS_PER_IN);
-        bRTickGoal = (int) (bRInches * TICKS_PER_IN);
+        fLTickGoal = (int) (TICKS_PER_IN * fLInches);
+        fRTickGoal = (int) (TICKS_PER_IN * fRInches);
+        bLTickGoal = (int) (TICKS_PER_IN * bLInches);
+        bRTickGoal = (int) (TICKS_PER_IN * bRInches);
         setRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setTargetPos(fLTickGoal, fRTickGoal, bLTickGoal, bRTickGoal);
         setRunMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -270,6 +270,7 @@ public class Drivetrain implements Constants {
                     .addData("fR", frontRight.getCurrentPosition())
                     .addData("bL", backLeft.getCurrentPosition())
                     .addData("bR", backRight.getCurrentPosition())
+                    .addData("tick goal", fLTickGoal + " * " + TICKS_PER_IN)
                     .addData("fLTickGoal", fLTickGoal)
                     .addData("fRTickGoal", fRTickGoal)
                     .addData("bLTickGoal", bLTickGoal)

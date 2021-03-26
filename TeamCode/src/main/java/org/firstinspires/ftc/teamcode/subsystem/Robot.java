@@ -50,7 +50,7 @@ public class Robot implements Constants {
                 drawbridge.setPower(.8);
                 wobbleGoal.setLiftPower(.8);
                 wobbleGoal.setGrabberPower(1);
-                intake.setPower(.5);
+                //intake.setPower(.5);
                 outtake.setPower(1);
                 break;
         }
