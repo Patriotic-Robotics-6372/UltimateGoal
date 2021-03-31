@@ -9,6 +9,8 @@ public interface Constants {
 
     double TICKS_PER_IN = 537.6/(4*Math.PI);
 
+    int LIFT_THRESHOLD = -500;
+
     enum Status {
         FORWARDS, BACKWARDS,
         UP, DOWN,

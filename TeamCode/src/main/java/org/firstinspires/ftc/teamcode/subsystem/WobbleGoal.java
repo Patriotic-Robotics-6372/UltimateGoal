@@ -30,6 +30,10 @@ public class WobbleGoal implements Constants {
         wobbleS = WG2;
     }
 
+    public void useEncoder() {
+        wobbleLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        wobbleLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
     /**
      * By having a positive power the lift should pull the drawslide up
      */
@@ -41,7 +45,11 @@ public class WobbleGoal implements Constants {
      * By having a negative power the lift should make the drawslide go down
      */
     public void down(){
-        wobbleLift.setPower(liftPower);
+        if (wobbleLift.getCurrentPosition() > LIFT_THRESHOLD) {
+            wobbleLift.setPower(liftPower);
+        } else {
+            wobbleLift.setPower(STOP);
+        }
     }
 
     /**

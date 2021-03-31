@@ -25,7 +25,7 @@ public class prTeleOpv1_4 extends LinearOpMode {
         telemetry.addData("Desc", "This is the official teleOp class")
                 .addData("Drivetrain", "Tank drive. Sticks for basic movement. Buttons for encoder movement")
                 .addData("Drawbridge", "Dpad Up to go up, Dpad Down to go down")
-                .addData("WobbleGoal", "x/a for up/down lift. y/b to grab/let go")
+                .addData("WobbleGoal", "dpad up/down for up/down lift. right/left to grab/let go")
                 .addData("Intake", "right trigger -> inward, left trigger -> outward")
                 .addData("Outtake", "Right bumper to shoot. Left bumper to push ring out/let go leftBumper to let ring in");
         telemetry.update();
@@ -51,23 +51,23 @@ public class prTeleOpv1_4 extends LinearOpMode {
                 prbot.getDrivetrain().setPower(1);
             }
             // Drawbridge subsystem
-            if (gamepad1.dpad_up) {
+            if (gamepad1.y) {
                 setpoint += rate;
-            } else if (gamepad1.dpad_down) {
+            } else if (gamepad1.a) {
                 setpoint -= rate;
             }
             prbot.getDrawbridge().getPulleyBoi().setPower(drawbridgePID.output(setpoint, prbot.getDrawbridge().getPulleyBoi().getCurrentPosition()));
             // WobbleGoal subsystem
-            if (gamepad1.y) {
+            if (gamepad1.dpad_right) {
                 prbot.getWobbleGoal().grab();
-            } else if (gamepad1.b) {
+            } else if (gamepad1.dpad_left) {
                 prbot.getWobbleGoal().letGo();
             } else {
                 prbot.getWobbleGoal().stopServos();
             }
-            if (gamepad1.x) {
+            if (gamepad1.dpad_up) {
                 prbot.getWobbleGoal().up();
-            } else if (gamepad1.a) {
+            } else if (gamepad1.dpad_down) {
                 prbot.getWobbleGoal().down();
             } else {
                 prbot.getWobbleGoal().stopMotor();
