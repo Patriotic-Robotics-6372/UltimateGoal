@@ -12,7 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class WobbleGoal implements Constants {
     // Characteristics
     private DcMotor wobbleLift;
-    private CRServo wobbleGrabber,wobbleGrabber2;
+    private CRServo wobbleCRS;
+    private Servo wobbleS;
     private double liftPower;
     private double grabberPower;
     // Constructor
@@ -23,24 +24,24 @@ public class WobbleGoal implements Constants {
      * @param WG1
      * @param WG2
      */
-    public WobbleGoal(DcMotor WL, CRServo WG1, CRServo WG2){
+    public WobbleGoal(DcMotor WL, CRServo WG1, Servo WG2){
         wobbleLift = WL;
-        wobbleGrabber = WG1;
-        wobbleGrabber2 = WG2;
+        wobbleCRS = WG1;
+        wobbleS = WG2;
     }
 
     /**
      * By having a positive power the lift should pull the drawslide up
      */
     public void up(){
-        wobbleLift.setPower(liftPower);
+        wobbleLift.setPower(-liftPower);
     }
 
     /**
      * By having a negative power the lift should make the drawslide go down
      */
     public void down(){
-        wobbleLift.setPower(-liftPower);
+        wobbleLift.setPower(liftPower);
     }
 
     /**
@@ -55,8 +56,8 @@ public class WobbleGoal implements Constants {
      */
 
     public void grab(){
-        wobbleGrabber.setPower(-grabberPower);
-        wobbleGrabber2.setPower(grabberPower);
+        wobbleCRS.setPower(grabberPower);
+        wobbleS.setPosition(0);
     }
 
     /**
@@ -64,16 +65,16 @@ public class WobbleGoal implements Constants {
      */
 
     public void letGo(){
-        wobbleGrabber.setPower(grabberPower);
-        wobbleGrabber2.setPower(-grabberPower);
+        wobbleCRS.setPower(-grabberPower);
+        wobbleS.setPosition(180);
     }
 
     /**
      * Stoping the servos
      */
     public void stopServos(){
-        wobbleGrabber.setPower(STOP);
-        wobbleGrabber2.setPower(STOP);
+        wobbleCRS.setPower(STOP);
+        wobbleS.setPosition(90);
     }
 
     public void setGrabberPower(double power) {
@@ -94,7 +95,7 @@ public class WobbleGoal implements Constants {
 
     public DcMotor getWobbleLift() { return wobbleLift; }
 
-    public CRServo getWobbleGrabber() { return wobbleGrabber; }
+    public CRServo getWobbleGrabber() { return wobbleCRS; }
 
-    public CRServo getWobbleGrabber2() { return wobbleGrabber2; }
+    public Servo getWobbleGrabber2() { return wobbleS; }
 }

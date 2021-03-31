@@ -23,7 +23,7 @@ public class Robot implements Constants {
     public void init(HardwareMap hwMap, Telemetry telemetry) {
         drivetrain = new Drivetrain(hwMap.dcMotor.get("frontLeft"), hwMap.dcMotor.get("frontRight"), hwMap.dcMotor.get("backLeft"), hwMap.dcMotor.get("backRight"));
         drawbridge = new Drawbridge(hwMap.dcMotor.get("pulleyBoi"));
-        wobbleGoal = new WobbleGoal(hwMap.dcMotor.get("wobbleLift"), hwMap.crservo.get("wobbleGrabber"), hwMap.crservo.get("wobbleGrabber2"));
+        wobbleGoal = new WobbleGoal(hwMap.dcMotor.get("wobbleLift"), hwMap.crservo.get("wobbleGrabber"), hwMap.servo.get("wobbleGrabber2"));
         //intake = new Intake(hwMap.dcMotor.get("roller"));
         outtake = new Outtake(hwMap.dcMotor.get("leftFlywheel"), hwMap.dcMotor.get("rightFlywheel"), hwMap.crservo.get("positioner"));
         imu = new IMU(hwMap.get(BNO055IMU.class, "imu 1"));
