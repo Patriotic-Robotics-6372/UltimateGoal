@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.subsystem.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
-@Autonomous (name = "autonWobbleGoalA", group = "primary")
+@Autonomous (name = "autonWobbleGoalB", group = "primary")
 public class autonWobbleGoalB extends LinearOpMode {
 
     Robot prbot = new Robot();
@@ -30,7 +30,7 @@ public class autonWobbleGoalB extends LinearOpMode {
             prbot.getWobbleGoal().down();
             sleep(700);
             prbot.getWobbleGoal().stopMotor();
-            prbot.getDrivetrain().forward(27);
+            prbot.getDrivetrain().forward(42);
             prbot.getDrivetrain().stop();
             break;
         }

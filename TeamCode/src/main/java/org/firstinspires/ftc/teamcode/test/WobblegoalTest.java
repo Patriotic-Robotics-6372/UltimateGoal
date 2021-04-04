@@ -18,7 +18,7 @@ public class WobblegoalTest extends OpMode {
 
     @Override
     public void init() {
-        wobbleGoal = new WobbleGoal(hardwareMap.dcMotor.get("wobbleLift"),hardwareMap.crservo.get("wobbleGrabber"),hardwareMap.crservo.get("wobbleGrabber2"));
+        wobbleGoal = new WobbleGoal(hardwareMap.dcMotor.get("wobbleLift"),hardwareMap.crservo.get("wobbleGrabber"),hardwareMap.servo.get("wobbleGrabber2"));
         telem = new Telem(wobbleGoal, telemetry);
         wobbleGoal.setLiftPower(1);
         wobbleGoal.setGrabberPower(.8);

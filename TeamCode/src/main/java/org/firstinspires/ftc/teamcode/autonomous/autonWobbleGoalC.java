@@ -8,8 +8,8 @@ import org.firstinspires.ftc.teamcode.subsystem.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.PIDController3;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
-@Autonomous (name = "autonWobbleGoalA", group = "primary")
-public class autonWobbleGoalA extends LinearOpMode {
+@Autonomous (name = "autonWobbleGoalC", group = "primary")
+public class autonWobbleGoalC extends LinearOpMode {
 
     Robot prbot = new Robot();
     ElapsedTime elapsedTime;
@@ -30,7 +30,7 @@ public class autonWobbleGoalA extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
             elapsedTime = new ElapsedTime();
-            prbot.getDrivetrain().backward(60);
+            prbot.getDrivetrain().backward(100);
             prbot.getWobbleGoal().letGo();
             sleep(200);
             prbot.getWobbleGoal().stopServos();
@@ -47,7 +47,7 @@ public class autonWobbleGoalA extends LinearOpMode {
             prbot.getDrivetrain().pointTurnLeft();
             prbot.getDrivetrain().stop();
             sleep(500);
-            prbot.getDrivetrain().forward(18);
+            prbot.getDrivetrain().forward(58);
             break;
         }
     }

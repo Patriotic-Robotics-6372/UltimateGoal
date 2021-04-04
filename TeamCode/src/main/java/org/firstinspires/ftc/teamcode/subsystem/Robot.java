@@ -44,11 +44,12 @@ public class Robot implements Constants {
                 outtake.setPower(1);
                 break;
             case AUTO:
-                drivetrain.setPower(1);
+                drivetrain.setPower(.5);
                 drivetrain.useBrake(true);
                 drivetrain.useEncoders(true);
+                drawbridge.useEncoders();
                 drawbridge.setPower(.8);
-                wobbleGoal.setLiftPower(.8);
+                wobbleGoal.setLiftPower(.3);
                 wobbleGoal.setGrabberPower(1);
                 //intake.setPower(.5);
                 outtake.setPower(1);

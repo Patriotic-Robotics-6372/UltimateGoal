@@ -76,7 +76,7 @@ public class Telem {
     public void addWobbleGoal() {
         telem.addData("wobbleLift", wobbleGoal.getWobbleLift().getPower());
         telem.addData("wobbleGrabber1", wobbleGoal.getWobbleGrabber().getPower());
-        telem.addData("wobbleGrabber2", wobbleGoal.getWobbleGrabber2().getPower());
+        telem.addData("wobbleGrabber2", wobbleGoal.getWobbleGrabber2().getPosition());
     }
 
     public void addIntake() {

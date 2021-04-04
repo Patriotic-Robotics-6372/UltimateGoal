@@ -64,8 +64,8 @@ public class WobbleGoal implements Constants {
      */
 
     public void grab(){
-        wobbleCRS.setPower(grabberPower);
-        wobbleS.setPosition(0);
+        wobbleCRS.setPower(-grabberPower);
+        wobbleS.setPosition(0.1);
     }
 
     /**
@@ -73,8 +73,8 @@ public class WobbleGoal implements Constants {
      */
 
     public void letGo(){
-        wobbleCRS.setPower(-grabberPower);
-        wobbleS.setPosition(180);
+        wobbleCRS.setPower(grabberPower);
+        wobbleS.setPosition(0.9);
     }
 
     /**
@@ -82,7 +82,7 @@ public class WobbleGoal implements Constants {
      */
     public void stopServos(){
         wobbleCRS.setPower(STOP);
-        wobbleS.setPosition(90);
+        wobbleS.setPosition(0.5);
     }
 
     public void setGrabberPower(double power) {
@@ -97,9 +97,7 @@ public class WobbleGoal implements Constants {
         this.liftPower = power;
     }
 
-    public double getLiftPower() {
-        return liftPower;
-    }
+    public double getLiftPower() { return liftPower; }
 
     public DcMotor getWobbleLift() { return wobbleLift; }
 

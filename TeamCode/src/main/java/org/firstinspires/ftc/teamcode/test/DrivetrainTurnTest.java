@@ -20,7 +20,7 @@ public class DrivetrainTurnTest extends LinearOpMode {
     Drivetrain drive;
     //Telem telem = new Telem(drive, telemetry);
     Button y, x, a;
-    double dist;
+    double dist = 19.5;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -91,6 +91,10 @@ public class DrivetrainTurnTest extends LinearOpMode {
                   drive.pointTurn(Constants.Status.RIGHT, dist);
                   sleep(4000);
               }
+              telemetry.addData("dist", dist);
+              telemetry.update();
+            //drive.pointTurn(Constants.Status.LEFT, dist);
+            //sleep(5000);
         }
     }
 }

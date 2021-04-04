@@ -2,9 +2,13 @@ package org.firstinspires.ftc.teamcode.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.subsystem.Constants;
+import org.firstinspires.ftc.teamcode.subsystem.PIDController3;
+import org.firstinspires.ftc.teamcode.subsystem.Robot;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -22,9 +26,20 @@ public class RingPositionDeterminationRedRight extends LinearOpMode {
     OpenCvCamera webcam;
     RingPositionDeterminationPipeline pipeline;
     RingPositionDeterminationPipeline.RingPosition position;
+    Robot prbot = new Robot();
+    PIDController3 pid;
+    int setpoint;
+    ElapsedTime elapsedTime;
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+        prbot.init(hardwareMap, telemetry);
+        prbot.getDrivetrain().setTelemetry(telemetry);
+        prbot.setMode(Constants.Status.AUTO);
+        prbot.getWobbleGoal().grab();
+        pid = new PIDController3(0.007, 0.000035, 0.0007, 20);
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
@@ -48,15 +63,77 @@ public class RingPositionDeterminationRedRight extends LinearOpMode {
 
         while (opModeIsActive())
         {
+
+            sleep(500);
             position = pipeline.getPosition();
             telemetry.addData("Analysis", position);
             telemetry.addData("test", "yes");
             telemetry.update();
 
+            elapsedTime = new ElapsedTime();
+            prbot.getDrivetrain().pointTurnRight();
+            if (position == RingPositionDeterminationPipeline.RingPosition.NONE) {
+                prbot.getDrawbridge().getPulleyBoi().setPower(0.5);
+                sleep(200);
+                prbot.getDrawbridge().getPulleyBoi().setPower(0.05);
+                prbot.getDrivetrain().backward(60);
+                prbot.getWobbleGoal().letGo();
+                sleep(200);
+                prbot.getWobbleGoal().stopServos();
+                prbot.getWobbleGoal().down();
+                sleep(700);
+                prbot.getWobbleGoal().stopMotor();
+                prbot.getDrivetrain().forward(3);
+                prbot.getDrivetrain().stop();
+                sleep(500);
+                prbot.getDrivetrain().pointTurnRight();
+                prbot.getDrivetrain().stop();
+                sleep(500);
+                prbot.getDrivetrain().forward(24);
+                prbot.getDrivetrain().pointTurnLeft();
+                prbot.getDrivetrain().stop();
+                sleep(500);
+                prbot.getDrivetrain().forward(69);
+                sleep(1000);
+                while (prbot.getDrawbridge().getPulleyBoi().getCurrentPosition() < Constants.SHOOT_UP_SETPOINT) {
+                    if (setpoint < Constants.SHOOT_UP_SETPOINT) {
+                        setpoint++;
+                    }
+                    telemetry.addData("setpoint", setpoint);
+                    telemetry.addData("enc", prbot.getDrawbridge().getPulleyBoi().getCurrentPosition());
+                    telemetry.update();
+                    prbot.getDrawbridge().getPulleyBoi().setPower(pid.output(setpoint, prbot.getDrawbridge().getPulleyBoi().getCurrentPosition()));
+                }
+//            while (prbot.getDrawbridge().getPulleyBoi().getCurrentPosition() < setpoint) {
+//                prbot.getDrawbridge().getPulleyBoi().setPower(pid.output(setpoint + 100, prbot.getDrawbridge().getPulleyBoi().getCurrentPosition()));
+//            }
+                while (elapsedTime.milliseconds() < 15000) {
+                    prbot.getDrawbridge().getPulleyBoi().setPower(pid.output(setpoint, prbot.getDrawbridge().getPulleyBoi().getCurrentPosition()));
+                }
+                prbot.getOuttake().shoot();
+                while (elapsedTime.milliseconds() < 20000) {
+                    prbot.getDrawbridge().getPulleyBoi().setPower(pid.output(setpoint, prbot.getDrawbridge().getPulleyBoi().getCurrentPosition()));
+                }
+                prbot.getOuttake().stop();
+                while (elapsedTime.milliseconds() < 25000) {
+                    if (setpoint > 0) {
+                        setpoint--;
+                    }
+                    telemetry.addData("setpoint", setpoint);
+                    telemetry.addData("enc", prbot.getDrawbridge().getPulleyBoi().getCurrentPosition());
+                    telemetry.update();
+                    prbot.getDrawbridge().getPulleyBoi().setPower(pid.output(setpoint, prbot.getDrawbridge().getPulleyBoi().getCurrentPosition()));
+                }
+                prbot.getDrivetrain().backward(40);
+                prbot.getDrivetrain().stop();
+            } else if (position == RingPositionDeterminationPipeline.RingPosition.ONE) {
 
+            } else {
 
+            }
+
+            break;
             // Don't burn CPU cycles busy-looping in this sample
-            sleep(50);
         }
     }
 
@@ -79,8 +156,8 @@ public class RingPositionDeterminationRedRight extends LinearOpMode {
         static final int REGION_WIDTH = 120;
         static final int REGION_HEIGHT = 100;
 
-        final int FOUR_RING_THRESHOLD = 160;
-        final int ONE_RING_THRESHOLD = 150;
+        final int FOUR_RING_THRESHOLD = 145;
+        final int ONE_RING_THRESHOLD = 130;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,

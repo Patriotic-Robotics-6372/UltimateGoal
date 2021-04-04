@@ -207,12 +207,22 @@ public class Drivetrain implements Constants {
     public void pointTurn(Status dir, double inches) {
         switch (dir) {
             case LEFT:
-                drive(inches, -inches, inches, -inches, power, power, power, power);
-                break;
-            case RIGHT:
                 drive(-inches, inches, -inches, inches, power, power, power, power);
                 break;
+            case RIGHT:
+                drive(inches, -inches, inches, -inches, power, power, power, power);
+                break;
         }
+    }
+
+    // 19 at field. 18.5 at home
+    public void pointTurnRight() {
+        pointTurn(Status.RIGHT, 18.5);
+    }
+
+    // 19 at field. 18.5 at home
+    public void pointTurnLeft() {
+        pointTurn(Status.LEFT, 18.5);
     }
 
     /**

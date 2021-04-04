@@ -11,6 +11,9 @@ public interface Constants {
 
     int LIFT_THRESHOLD = -500;
 
+    int SHOOT_UP_START = 300;
+    int SHOOT_UP_SETPOINT = 800;
+
     enum Status {
         FORWARDS, BACKWARDS,
         UP, DOWN,

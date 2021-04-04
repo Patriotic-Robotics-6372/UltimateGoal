@@ -20,7 +20,6 @@ public class Button {
 
     public Button(int states) {
         this.states = states;
-
     }
 
     /**

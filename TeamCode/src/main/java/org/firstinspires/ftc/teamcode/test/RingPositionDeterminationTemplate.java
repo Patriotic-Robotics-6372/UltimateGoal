@@ -72,8 +72,8 @@ public class RingPositionDeterminationTemplate extends LinearOpMode {
         static final int REGION_WIDTH = 120;
         static final int REGION_HEIGHT = 100;
 
-        final int FOUR_RING_THRESHOLD = 150;
-        final int ONE_RING_THRESHOLD = 135;
+        final int FOUR_RING_THRESHOLD = 145;
+        final int ONE_RING_THRESHOLD = 130;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
