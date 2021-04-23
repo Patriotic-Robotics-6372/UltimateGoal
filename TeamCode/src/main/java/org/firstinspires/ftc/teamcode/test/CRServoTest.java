@@ -2,20 +2,21 @@ package org.firstinspires.ftc.teamcode.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.subsystem.Button;
 
-@TeleOp (name = "ServoTest", group = "Test")
-public class ServoTest extends LinearOpMode {
+@TeleOp (name = "CRServoTest", group = "Test")
+public class CRServoTest extends LinearOpMode {
 
-    Servo servo;
+    CRServo servo;
     int pos;
     Button up, down, right;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        servo = hardwareMap.servo.get("servo");
+        servo = hardwareMap.crservo.get("servo");
         telemetry.addData("How to Use", "Dpad up/down to increase/decrase pos. dpad right to toggle pos");
         telemetry.update();
         up = new Button();
@@ -36,10 +37,10 @@ public class ServoTest extends LinearOpMode {
             }
             telemetry.addData("pos", pos);
             if (right.isPressed()) {
-                servo.setPosition(pos);
+                servo.setPower(pos/100);
             }
             telemetry.addData("toggle", right.getToggle());
-            telemetry.addData("servo pos", servo.getPosition());
+            telemetry.addData("servo pos", servo.getPower());
             telemetry.update();
         }
     }

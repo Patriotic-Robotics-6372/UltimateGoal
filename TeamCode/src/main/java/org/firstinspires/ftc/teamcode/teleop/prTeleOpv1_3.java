@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 import static org.firstinspires.ftc.teamcode.subsystem.Constants.Status.NORMAL;
 
+@Disabled
 @TeleOp (name = "prTeleOp v1.3", group = "a")
 public class prTeleOpv1_3 extends LinearOpMode {
 
